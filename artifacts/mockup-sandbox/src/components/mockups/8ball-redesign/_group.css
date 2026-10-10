@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=Press+Start+2P&display=swap');
+
+.eightball-current {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 27px clamp(20px, 4.3vw, 68px) 22px;
+  overflow: hidden;
+  position: relative;
+  color: #171717;
+  background: #eeede8;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.eightball-current * { box-sizing: border-box; }
+.eightball-current header,
+.eightball-current section,
+.eightball-current footer { position: relative; z-index: 1; }
+.eightball-current header { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #777; padding-bottom:16px; }
+.eightball-current .brand-lockup { display:flex; align-items:center; gap:12px; font:500 11px 'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; }
+.eightball-current .brand-mark { display:grid; place-items:center; width:27px; height:27px; border:1px solid currentColor; border-radius:50%; font:16px 'Instrument Serif',serif; letter-spacing:0; }
+.eightball-current .top-meta { display:flex; align-items:center; gap:20px; color:#666; font:10px 'DM Mono',monospace; letter-spacing:.08em; text-transform:uppercase; }
+.eightball-current .signal { display:inline-flex; align-items:center; gap:8px; }
+.eightball-current .signal::before { content:''; width:5px; height:5px; border-radius:50%; background:currentColor; }
+.eightball-current .main-stage { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:30px 0 36px; min-height:620px; }
+.eightball-current .eyebrow { margin:0 0 14px; color:#666; font:10px 'DM Mono',monospace; letter-spacing:.19em; text-transform:uppercase; }
+.eightball-current h1 { margin:0; font:400 clamp(31px,4.7vw,57px)/.99 'Instrument Serif',serif; letter-spacing:-.035em; text-align:center; }
+.eightball-current .subheading { margin:13px 0 0; color:#777; font:11px 'DM Mono',monospace; letter-spacing:.035em; text-align:center; }
+.eightball-current .orb-wrap { width:min(410px,77vw); aspect-ratio:1; margin:14px 0 9px; position:relative; display:grid; place-items:center; }
+.eightball-current .orb-svg { width:100%; height:100%; overflow:visible; shape-rendering:crispEdges; }
+.eightball-current .orb-shadow { fill:#181818; }
+.eightball-current .orb-edge { fill:#d9d7d2; }
+.eightball-current .orb-body { fill:#111; }
+.eightball-current .orb-facet { fill:#242424; }
+.eightball-current .orb-glint { fill:#777; opacity:.45; }
+.eightball-current .orb-window { fill:#e9e7e2; }
+.eightball-current .orb-window-edge { fill:none; stroke:#f3f1ec; stroke-width:2; opacity:.64; }
+.eightball-current .orb-streak { fill:none; stroke:#eceae5; stroke-width:6; stroke-linecap:square; }
+.eightball-current .orb-streak-thin { fill:none; stroke:#d2d0ca; stroke-width:1.6; stroke-linecap:square; }
+.eightball-current .orb-copy { position:absolute; width:33%; aspect-ratio:1; display:grid; place-items:center; color:#171717; font:500 clamp(11px,1.75vw,17px)/1.05 'DM Mono',monospace; text-transform:uppercase; }
+.eightball-current .prompt-area { width:min(530px,100%); margin:9px auto 0; }
+.eightball-current .prompt-label { display:flex; justify-content:space-between; margin-bottom:9px; color:#777; font:9px 'DM Mono',monospace; letter-spacing:.13em; text-transform:uppercase; }
+.eightball-current .prompt-box { border:1px solid #999; background:rgba(255,255,255,.2); }
+.eightball-current textarea { width:100%; min-height:65px; display:block; resize:vertical; border:0; outline:0; padding:17px 18px 13px; background:transparent; color:#171717; font:14px/1.5 'Instrument Serif',serif; }
+.eightball-current textarea::placeholder { color:#888; }
+.eightball-current .prompt-note { margin:9px 0 0; display:flex; justify-content:space-between; color:#777; font:9px 'DM Mono',monospace; letter-spacing:.045em; }
+.eightball-current .prompt-note span:last-child { text-transform:uppercase; letter-spacing:.12em; }
+.eightball-current footer { display:flex; justify-content:space-between; border-top:1px solid #777; padding-top:14px; color:#777; font:9px 'DM Mono',monospace; letter-spacing:.1em; text-transform:uppercase; }
+@media (max-width:600px) {
+  .eightball-current { padding:18px 19px 17px; }
+  .eightball-current header { padding-bottom:13px; }
+  .eightball-current .edition { display:none; }
+  .eightball-current .main-stage { min-height:calc(100vh - 115px); padding:34px 0 27px; }
+  .eightball-current .orb-wrap { width:min(350px,87vw); margin:10px 0 8px; }
+  .eightball-current .prompt-box textarea { min-height:76px; font-size:15px; }
+  .eightball-current footer { font-size:8px; letter-spacing:.065em; }
+}
