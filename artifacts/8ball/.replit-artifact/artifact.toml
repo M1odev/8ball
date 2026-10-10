@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "8ball"
+description = "A monochrome, 8-bit-inspired chat shell for asking Jev questions, centered on a striking eight ball. Frontend only: a text prompt with no AI, web search, accounts, or backend connections."
+version = "1.0.0"
+id = "artifacts/8ball"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18933
+
+[services.development]
+run = "pnpm --filter @workspace/8ball run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/8ball", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/8ball/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18933"
+BASE_PATH = "/"
