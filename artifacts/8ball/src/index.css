@@ -110,7 +110,7 @@ body { min-width: 320px; min-height: 100dvh; }
 }
 .orb {
   position: relative;
-  width: min(80vw, 480px);
+  width: min(76vw, 400px);
   aspect-ratio: 1;
   display: block;
 }
@@ -205,7 +205,7 @@ body { min-width: 320px; min-height: 100dvh; }
   .page-shell { padding: 18px 16px; }
   .brand { font-size: 13px; }
   .main-stage { gap: 28px; }
-  .orb { width: min(84vw, 360px); }
+  .orb { width: min(76vw, 300px); }
   .prompt-frame { width: 100%; }
   .prompt { min-height: 56px; font-size: 14px; }
 }

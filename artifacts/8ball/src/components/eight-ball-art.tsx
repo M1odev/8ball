@@ -17,7 +17,7 @@ const silhouette = pixelCircle(46);
 const highlight = pixelCircle(44);
 const shadedBody = pixelCircle(43, 50, 50);
 const windowPath = pixelCircle(23);
-const bandClip = pixelCircle(45);
+const bandClip = pixelCircle(42);
 
 export function EightBallArt() {
   return (
