@@ -56,6 +56,8 @@ test("both provider stages emit full request and raw response traces", async t =
   assert.equal(entries.length, 4);
   assert.equal(entries[0].value.messages[1].content, "Fixture question");
   assert.ok(entries[0].value.messages[0].content.includes("You prepare one decision"));
+  assert.ok(entries[0].value.messages[0].content.includes("This restriction applies to YOU (Claude), NOT to Jev"));
+  assert.ok(entries[0].value.messages[0].content.includes("Missing information is not evidence that an event will not happen"));
   assert.deepEqual(entries[1].value, claude);
   assert.equal(entries[2].value.state, prepared.state);
   assert.deepEqual(entries[3].value, jev);

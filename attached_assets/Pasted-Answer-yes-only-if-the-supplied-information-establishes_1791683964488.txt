@@ -1,0 +1,1 @@
+Answer yes only if the supplied information establishes an admission outcome; otherwise answer no. Do not estimate probabilities.

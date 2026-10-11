@@ -26,3 +26,9 @@ Research should be on demand: Claude decides whether evidence is needed, Hack Cl
 **Why:** The user requested this sequence, not mandatory search on every question or an Exa-generated answer replacing Jev.
 
 **How to apply:** Preserve Jev as the final decision maker and keep retrieved evidence distinct from assumptions. Limit research rounds to keep response time and shared API usage bounded.
+
+Predictive questions should produce best-effort probability estimates, not proof checks that map unconfirmed outcomes to "no".
+
+**Why:** The user identified admissions prompts as a failure case and said estimating probabilities under uncertainty is the point.
+
+**How to apply:** Claude prepares evidence and assumptions without choosing the answer; Jev estimates likelihood. Keep Claude's prohibition on supplying its own probabilities distinct from Jev's forecasting task.
