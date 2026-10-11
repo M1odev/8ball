@@ -9,6 +9,12 @@ import type { DecisionResultOptionsItem } from './decisionResultOptionsItem';
 import type { DecisionResultType } from './decisionResultType';
 
 export interface DecisionResult {
+  /**
+     * Completed research rounds used to prepare this decision.
+     * @minimum 0
+     * @maximum 1
+     */
+  researchRounds?: number;
   readonly debugLog?: readonly string[];
   type: DecisionResultType;
   question: string;

@@ -2,6 +2,7 @@ import { type KeyboardEvent, type ReactNode, useEffect, useRef, useState } from 
 import { toJevPrompt, getJevResponse, type DecisionResult } from '@/lib/sendPrompts';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { EightBallArt } from '@/components/eight-ball-art';
+import { InfoTip } from '@/components/info-tip';
 import NotFound from '@/pages/not-found';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
@@ -53,6 +54,7 @@ function EightBall() {
     }
   };
   const orbText = busy ? '...' : result?.answer ?? '8';
+  const rounds = result?.researchRounds ?? 0;
   const isChoiceAnswer = !busy && result?.type === 'choice';
   const status = stage === 'preparing' ? 'Preparing context…'
     : stage === 'asking' ? 'Asking Jev…'
@@ -64,7 +66,7 @@ function EightBall() {
   return (
     <main className="page-shell">
       <header className="brand" aria-label="8ball">8Ball</header>
-      <section className="main-stage" aria-label="Ask a question">
+      <section className={`main-stage${result ? ' has-result' : ''}`} aria-label="Ask a question">
         <div className={`orb${busy ? ' is-busy' : ''}`} role="img" aria-label={`Eight ball: ${result?.answer ?? (busy ? 'thinking' : 'waiting for a question')}`}>
           <EightBallArt />
           <span
@@ -73,9 +75,15 @@ function EightBall() {
             aria-hidden="true"
           >{orbText}</span>
         </div>
-        <div className="readout">
+        <div className={`readout${result ? ' is-in' : ''}`} key={result ? 'r' : 'e'}>
           <p className={`status${stage === 'error' ? ' is-error' : ''}`} role="status" aria-live="polite">{status}</p>
-          {result?.question && <p className="asked">{result.question}</p>}
+          {result?.question && (
+            <div className="asked-row">
+              <p className="asked">{result.question}</p>
+              <InfoTip label="About this question">This is the question sent to Jev — prepared from your input with added context, not your exact words.</InfoTip>
+            </div>
+          )}
+          {rounds > 0 && <p className="rounds">{rounds} {rounds === 1 ? 'round' : 'rounds'} of research done</p>}
           {!!result?.options.length && (
             <ul className="bars" aria-label="Option weights">
               {result.options.map(option => {

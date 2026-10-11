@@ -110,6 +110,7 @@ export async function toJevPrompt(userInput: string, trace?: Trace): Promise<Pre
   ];
   let parsed = await askClaude(messages, trace);
   let sources = "";
+  let researchRounds = 0;
   if (parsed?.research !== undefined) {
     const { queries, reason } = parsed.research ?? {};
     if (!Array.isArray(queries) || queries.length < 1 || queries.length > 2 ||
@@ -155,13 +156,15 @@ export async function toJevPrompt(userInput: string, trace?: Trace): Promise<Pre
     );
     parsed = await askClaude(messages, trace);
     if (parsed?.research !== undefined) throw new DecisionError("Claude requested more research than allowed. Please try a more focused question.");
+    researchRounds = 1;
     const urls = [...new Set(research.flatMap(r => r.results.map(item => item.url)))];
     sources = `\n\nWeb research retrieved at ${date} (sources may be partial):\n${urls.length ? urls.join("\n") : "No usable sources returned; do not treat this as verified web evidence."}`;
   } else {
     trace?.("Research decision", "No web research requested; preparing directly.");
   }
   try {
-    const prompt = validatePrompt(parsed);
+    // Count actual completed rounds ourselves, never trust a model-supplied count.
+    const prompt = validatePrompt({ ...parsed, researchRounds });
     // Preserve the user's actual input even if Claude paraphrases it incorrectly.
     prompt.state = `Original user input:\n${userInput}\n\nPrepared context:\n${prompt.state}${sources}`;
     return validatePrompt(prompt);
@@ -180,6 +183,7 @@ export function normalizeAnswer(prompt: PreparedPrompt, data: any): DecisionResu
       throw new DecisionError("Jev returned an invalid yes/no probability.");
     }
     return AnswerDecisionResponse.parse({
+      researchRounds: prompt.researchRounds ?? 0,
       type: "noul", question, probability,
       answer: probability === 0.5 ? "UNCERTAIN" : probability > 0.5 ? "YES" : "NO",
       options: [],
@@ -197,7 +201,7 @@ export function normalizeAnswer(prompt: PreparedPrompt, data: any): DecisionResu
   if (Math.abs(total - 1) > 0.02 || !Object.hasOwn(criteria, answer.choice)) {
     throw new DecisionError("Jev returned an invalid multiple-choice answer.");
   }
-  return AnswerDecisionResponse.parse({ type: "choice", question, answer: criteria[answer.choice], options });
+  return AnswerDecisionResponse.parse({ type: "choice", question, answer: criteria[answer.choice], options, researchRounds: prompt.researchRounds ?? 0 });
 }
 
 export async function getJevResponse(value: unknown, trace?: Trace): Promise<DecisionResult> {

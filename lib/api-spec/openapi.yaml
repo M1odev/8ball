@@ -104,6 +104,11 @@ components:
       type: object
       required: [state, question]
       properties:
+        researchRounds:
+          type: integer
+          minimum: 0
+          maximum: 1
+          description: Completed research rounds, not the number of search queries.
         debugLog:
           type: array
           readOnly: true
@@ -136,6 +141,11 @@ components:
       type: object
       required: [type, question, answer, options]
       properties:
+        researchRounds:
+          type: integer
+          minimum: 0
+          maximum: 1
+          description: Completed research rounds used to prepare this decision.
         debugLog:
           type: array
           readOnly: true

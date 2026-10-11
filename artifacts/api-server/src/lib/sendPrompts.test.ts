@@ -11,12 +11,15 @@ test("noul preserves probability of yes even when answer is no", () => {
   assert.equal(result.answer, "NO");
   assert.equal(result.probability, 0.1);
   assert.deepEqual(result.options, []);
+  assert.equal(result.researchRounds, 0);
+  assert.equal(normalizeAnswer({ ...noul, researchRounds: 1 }, { answers: { decision: { noul: 0.1 } } }).researchRounds, 1);
   assert.equal(normalizeAnswer(noul, { answers: { decision: { noul: 0.5 } } }).answer, "UNCERTAIN");
 });
 test("choice maps keys to labels without fabricating or renormalizing weights", () => {
   const result = normalizeAnswer(choice, { answers: { decision: { choice: "b", probabilities: { a: 0.2, b: 0.8 } } } });
   assert.equal(result.answer, "Option B");
   assert.deepEqual(result.options.map(o => o.weight), [0.2, 0.8]);
+  assert.equal(normalizeAnswer({ ...choice, researchRounds: 1 }, { answers: { decision: { choice: "b", probabilities: { a: 0.2, b: 0.8 } } } }).researchRounds, 1);
 });
 test("rejects unsupported score and insufficient options", () => {
   assert.throws(() => validatePrompt({ ...noul, question: { ...noul.question, type: "score" } }));
@@ -48,6 +51,7 @@ test("both provider stages emit full request and raw response traces", async t =
     if (label.includes("attempt")) entries.push({ label, value });
   };
   const prepared = await toJevPrompt("Fixture question", trace);
+  assert.equal(prepared.researchRounds, 0);
   await getJevResponse(prepared, trace);
   assert.equal(entries.length, 4);
   assert.equal(entries[0].value.messages[1].content, "Fixture question");
@@ -73,6 +77,7 @@ test("research runs Exa then rebuilds context, preserving evidence and choice la
   });
   const prepared = await toJevPrompt("Compare current prices for Option A and Option B");
   assert.equal(calls.length, 3);
+  assert.equal(prepared.researchRounds, 1);
   assert.ok(calls[1].url.endsWith("exa/search"));
   assert.equal(calls[1].body.numResults, 3);
   assert.equal(calls[1].body.contents.text.maxCharacters, 2000);
@@ -89,6 +94,7 @@ test("empty results are explicit evidence gaps, not fabricated research", async 
   )));
   const prepared = await toJevPrompt("Research a topic with no results");
   assert.equal(call, 3);
+  assert.equal(prepared.researchRounds, 1);
   assert.ok(prepared.state.includes("No usable sources returned"));
 });
 

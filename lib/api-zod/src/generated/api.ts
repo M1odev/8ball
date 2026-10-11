@@ -16,6 +16,9 @@ export const PrepareDecisionBody = zod.object({
   "input": zod.string().min(1).max(prepareDecisionBodyInputMax)
 })
 
+export const prepareDecisionResponseResearchRoundsMin = 0;
+export const prepareDecisionResponseResearchRoundsMax = 1;
+
 export const prepareDecisionResponseStateMax = 20000;
 
 export const prepareDecisionResponseQuestionInstructionsMax = 2000;
@@ -25,6 +28,7 @@ export const prepareDecisionResponseQuestionCriteriaMaxOne = 300;
 
 
 export const PrepareDecisionResponse = zod.object({
+  "researchRounds": zod.number().int().min(prepareDecisionResponseResearchRoundsMin).max(prepareDecisionResponseResearchRoundsMax).optional().describe('Completed research rounds, not the number of search queries.'),
   "debugLog": zod.array(zod.string()).optional(),
   "state": zod.string().min(1).max(prepareDecisionResponseStateMax),
   "question": zod.object({
@@ -35,6 +39,9 @@ export const PrepareDecisionResponse = zod.object({
 })
 
 
+export const answerDecisionBodyResearchRoundsMin = 0;
+export const answerDecisionBodyResearchRoundsMax = 1;
+
 export const answerDecisionBodyStateMax = 20000;
 
 export const answerDecisionBodyQuestionInstructionsMax = 2000;
@@ -44,6 +51,7 @@ export const answerDecisionBodyQuestionCriteriaMaxOne = 300;
 
 
 export const AnswerDecisionBody = zod.object({
+  "researchRounds": zod.number().int().min(answerDecisionBodyResearchRoundsMin).max(answerDecisionBodyResearchRoundsMax).optional().describe('Completed research rounds, not the number of search queries.'),
   "state": zod.string().min(1).max(answerDecisionBodyStateMax),
   "question": zod.object({
   "type": zod.enum(['noul', 'choice']),
@@ -51,6 +59,9 @@ export const AnswerDecisionBody = zod.object({
   "criteria": zod.record(zod.string(), zod.string().min(1).max(answerDecisionBodyQuestionCriteriaMaxOne)).optional()
 })
 })
+
+export const answerDecisionResponseResearchRoundsMin = 0;
+export const answerDecisionResponseResearchRoundsMax = 1;
 
 export const answerDecisionResponseProbabilityMin = 0;
 export const answerDecisionResponseProbabilityMax = 1;
@@ -61,6 +72,7 @@ export const answerDecisionResponseOptionsItemWeightMax = 1;
 
 
 export const AnswerDecisionResponse = zod.object({
+  "researchRounds": zod.number().int().min(answerDecisionResponseResearchRoundsMin).max(answerDecisionResponseResearchRoundsMax).optional().describe('Completed research rounds used to prepare this decision.'),
   "debugLog": zod.array(zod.string()).optional(),
   "type": zod.enum(['noul', 'choice']),
   "question": zod.string(),

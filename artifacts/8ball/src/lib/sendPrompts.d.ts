@@ -1,4 +1,5 @@
 export interface PreparedPrompt {
+  researchRounds?: number;
   state: string;
   question: {
     type: 'noul' | 'choice';
@@ -7,6 +8,7 @@ export interface PreparedPrompt {
   };
 }
 export interface DecisionResult {
+  researchRounds?: number;
   type: 'noul' | 'choice';
   question: string;
   answer: string;

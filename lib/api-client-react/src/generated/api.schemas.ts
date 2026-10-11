@@ -34,6 +34,12 @@ export type PreparedPromptQuestion = {
 };
 
 export interface PreparedPrompt {
+  /**
+     * Completed research rounds, not the number of search queries.
+     * @minimum 0
+     * @maximum 1
+     */
+  researchRounds?: number;
   readonly debugLog?: readonly string[];
   /**
      * @minLength 1
@@ -62,6 +68,12 @@ export type DecisionResultOptionsItem = {
 };
 
 export interface DecisionResult {
+  /**
+     * Completed research rounds used to prepare this decision.
+     * @minimum 0
+     * @maximum 1
+     */
+  researchRounds?: number;
   readonly debugLog?: readonly string[];
   type: DecisionResultType;
   question: string;

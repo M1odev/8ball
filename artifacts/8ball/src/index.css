@@ -255,3 +255,23 @@ body { min-width: 320px; min-height: 100dvh; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+.orb { transition: width .7s cubic-bezier(.22,1,.36,1); }
+.main-stage { transition: padding-top .7s cubic-bezier(.22,1,.36,1), gap .7s cubic-bezier(.22,1,.36,1); }
+.main-stage.has-result { padding-top: 4px; gap: 18px; }
+.main-stage.has-result .orb { width: min(48vw, 230px, 30vh); }
+.readout.is-in > * { animation: rise .5s cubic-bezier(.22,1,.36,1) both; }
+.readout.is-in > *:nth-child(2) { animation-delay: .12s; }
+.readout.is-in > *:nth-child(3) { animation-delay: .2s; }
+.readout.is-in > *:nth-child(4) { animation-delay: .28s; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+.asked-row { position: relative; z-index: 2; display: flex; justify-content: center; align-items: flex-start; gap: 6px; }
+.rounds { margin: 0; text-align: center; font: 8px/1.8 'Press Start 2P', monospace; color: #555; }
+.info-tip { flex: 0 0 auto; }
+.info-btn { width: 28px; height: 28px; margin-top: 1px; display: grid; place-items: center; padding: 0; border: 1px solid #050505; border-radius: 0; background: #fff; color: #050505; font: 8px/1 'Press Start 2P', monospace; cursor: pointer; }
+.info-btn:hover, .info-btn[aria-expanded="true"] { background: #050505; color: #fff; }
+.info-btn:focus-visible { outline: 2px solid #050505; outline-offset: 2px; }
+.info-pop { position: absolute; top: calc(100% + 8px); right: -8px; z-index: 5; width: min(240px, calc(100vw - 40px)); padding: 10px 12px; border: 1px solid #050505; background: #fff; box-shadow: 3px 3px 0 #050505; font: 12px/1.5 'Space Grotesk', sans-serif; color: #050505; text-align: left; opacity: 0; transform: translateY(-4px); pointer-events: none; visibility: hidden; transition: opacity .16s ease, transform .16s ease, visibility .16s; }
+.info-pop.is-open { opacity: 1; transform: none; pointer-events: auto; visibility: visible; }
+.info-pop::before { content: ''; position: absolute; left: 0; right: 0; top: -10px; height: 10px; }
+@media (max-width: 600px) { .main-stage.has-result .orb { width: min(46vw, 180px, 28vh); } }
+@media (prefers-reduced-motion: reduce) { .readout.is-in > * { animation: none; } }
