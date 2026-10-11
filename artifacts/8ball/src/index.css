@@ -365,6 +365,8 @@ body { min-width: 320px; min-height: 100dvh; }
     color: #666;
     font: 12px/1.5 'Space Grotesk', Arial, sans-serif;
   }
+  .faq-item a { color: #111; text-underline-offset: 2px; }
+  .faq-item a:hover { text-decoration-thickness: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }

@@ -176,6 +176,18 @@ function EightBall() {
             <h3>How should I read the result?</h3>
             <p>For choices, the bars show Jev’s relative weighting for each option. Yes-or-no answers include an estimated probability of yes.</p>
           </article>
+          <article className="faq-item" data-testid="faq-usage">
+            <h3>How does pricing and usage work?</h3>
+            <p>8Ball doesn’t bill you: each browser gets 3 free questions total, with no reset. A question counts when processing starts, even if it fails. Free use is also capped at 12 questions per shared network each day.</p>
+          </article>
+          <article className="faq-item" data-testid="faq-hack-club">
+            <h3>What is Hack Club?</h3>
+            <p>Hack Club is a nonprofit community that helps teens learn to code by making projects. Hack Club AI offers API access to eligible members; its current access and usage limits are set by Hack Club. <a href="https://hackclub.com/" target="_blank" rel="noreferrer">About Hack Club</a> · <a href="https://ai.hackclub.com/" target="_blank" rel="noreferrer">Hack Club AI</a></p>
+          </article>
+          <article className="faq-item" data-testid="faq-keys">
+            <h3>What happens when I use my own key?</h3>
+            <p>You can continue after using the included questions. Your key is sent to Hack Club AI for processing and kept only in this tab. Hack Club AI sets its own eligibility and usage terms.</p>
+          </article>
         </div>
       </section>
     </main>
