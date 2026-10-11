@@ -182,7 +182,7 @@ function EightBall() {
           </article>
           <article className="faq-item" data-testid="faq-hack-club">
             <h3>What is Hack Club?</h3>
-            <p>Hack Club is a nonprofit community that helps teens learn to code by making projects. Hack Club AI offers API access to eligible members; its current access and usage limits are set by Hack Club. <a href="https://hackclub.com/" target="_blank" rel="noreferrer">About Hack Club</a> · <a href="https://ai.hackclub.com/" target="_blank" rel="noreferrer">Hack Club AI</a></p>
+            <p>Hack Club is a nonprofit community that helps teens learn to code by making projects. 8Ball is an independent project—not made, operated, or endorsed by, and not officially affiliated with, Hack Club. It uses Hack Club AI; access and usage terms are set by Hack Club. <a href="https://hackclub.com/" target="_blank" rel="noreferrer">About Hack Club</a> · <a href="https://ai.hackclub.com/" target="_blank" rel="noreferrer">Hack Club AI</a></p>
           </article>
           <article className="faq-item" data-testid="faq-keys">
             <h3>What happens when I use my own key?</h3>
