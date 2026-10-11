@@ -18,6 +18,7 @@ export function PlayfulBrand() {
         ))}
       </button>
       <span className="brand-byline">Powered by Jev</span>
+      <h1 className="brand-tagline">Jev online playground</h1>
     </header>
   );
 }

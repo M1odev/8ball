@@ -1,2 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /__mockup
+
+Sitemap: https://8-ball-m1o.replit.app/sitemap.xml
