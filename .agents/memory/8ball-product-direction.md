@@ -32,3 +32,9 @@ Predictive questions should produce best-effort probability estimates, not proof
 **Why:** The user identified admissions prompts as a failure case and said estimating probabilities under uncertainty is the point.
 
 **How to apply:** Claude prepares evidence and assumptions without choosing the answer; Jev estimates likelihood. Keep Claude's prohibition on supplying its own probabilities distinct from Jev's forecasting task.
+
+Named-applicant admissions predictions are an intended demo: research the applicant, not just university acceptance rates.
+
+**Why:** The user explicitly requested person-first admissions research for this demo.
+
+**How to apply:** Prioritize public relevant applicant evidence and identity disambiguation within the search budget. Do not substitute generic university statistics for a profile or fabricate personal details when a name cannot be matched.
