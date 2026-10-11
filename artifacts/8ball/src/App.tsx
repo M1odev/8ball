@@ -2,6 +2,8 @@ import { type KeyboardEvent, type ReactNode, useEffect, useRef, useState } from 
 import { toJevPrompt, getJevResponse, type DecisionResult } from '@/lib/sendPrompts';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { EightBallArt } from '@/components/eight-ball-art';
+import { PlayfulBall } from '@/components/playful-ball';
+import { PlayfulBrand } from '@/components/playful-brand';
 import { InfoTip } from '@/components/info-tip';
 import NotFound from '@/pages/not-found';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
@@ -65,18 +67,17 @@ function EightBall() {
 
   return (
     <main className="page-shell">
-      <header className="brand" aria-label="8Ball">
-        <span className="brand-name">8Ball</span>
-        <span className="brand-byline">Powered by Jev</span>
-      </header>
+      <PlayfulBrand />
       <section className={`main-stage${result ? ' has-result' : ''}`} aria-label="Ask a question">
-        <div className={`orb${busy ? ' is-busy' : ''}`} role="img" aria-label={`Eight ball: ${result?.answer ?? (busy ? 'thinking' : 'waiting for a question')}`}>
+        <div className={`orb${busy ? ' is-busy' : ''}`}>
+          <PlayfulBall label={`Eight ball: ${result?.answer ?? (busy ? 'thinking' : 'waiting for a question')}`}>
           <EightBallArt />
           <span
             className={`orb-answer${!result && !busy ? ' is-eight' : ''}${isChoiceAnswer ? ' is-choice' : ''}`}
             style={isChoiceAnswer ? { fontSize: `clamp(4px, ${Math.min(5, 28 / Math.sqrt(Math.max(1, orbText.length)))}cqw, 16px)` } : undefined}
             aria-hidden="true"
           >{orbText}</span>
+          </PlayfulBall>
         </div>
         <div className={`readout${result ? ' is-in' : ''}`} key={result ? 'r' : 'e'}>
           <p className={`status${stage === 'error' ? ' is-error' : ''}`} role="status" aria-live="polite">{status}</p>
