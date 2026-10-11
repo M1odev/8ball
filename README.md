@@ -3,7 +3,7 @@ It uses Claude to turn human input into a proper prompt with context for Jev and
 It also gives Claude the option to request web search through Hack Club's Exa API and conduct up to 2 rounds of research. 
 If you'd like to see the full prompts/responses, check the console. 
 I did NOT code this, I used replit agent to make it in a few hours.
-There is a strict lifetime usage limit of 3 responses because the responses are coming from Hack Club AI for free (or use your own Hack Club key)
+There is a strict lifetime usage limit of 3 responses because the responses are coming from Hack Club AI's API.
 
 full README (AI)
 
