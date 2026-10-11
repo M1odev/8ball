@@ -11,6 +11,56 @@ tags:
   - name: health
     description: Health operations
 paths:
+  /decision/prepare:
+    post:
+      operationId: prepareDecision
+      tags: [decision]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DecisionInput"
+      responses:
+        "200":
+          description: Claude-prepared context and question
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreparedPrompt"
+        "400":
+          $ref: "#/components/responses/DecisionError"
+        "429":
+          $ref: "#/components/responses/DecisionError"
+        "502":
+          $ref: "#/components/responses/DecisionError"
+        "503":
+          $ref: "#/components/responses/DecisionError"
+  /decision/answer:
+    post:
+      operationId: answerDecision
+      tags: [decision]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreparedPrompt"
+      responses:
+        "200":
+          description: Jev answer and option probabilities
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DecisionResult"
+        "400":
+          $ref: "#/components/responses/DecisionError"
+        "429":
+          $ref: "#/components/responses/DecisionError"
+        "502":
+          $ref: "#/components/responses/DecisionError"
+        "503":
+          $ref: "#/components/responses/DecisionError"
   /healthz:
     get:
       operationId: healthCheck
@@ -25,7 +75,82 @@ paths:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
 components:
+  responses:
+    DecisionError:
+      description: Validation, rate limit, configuration, or upstream failure
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [error]
+            properties:
+              error:
+                type: string
   schemas:
+    DecisionInput:
+      type: object
+      required: [input]
+      properties:
+        input:
+          type: string
+          minLength: 1
+          maxLength: 4000
+    PreparedPrompt:
+      type: object
+      required: [state, question]
+      properties:
+        state:
+          type: string
+          minLength: 1
+          maxLength: 20000
+        question:
+          type: object
+          required: [type, instructions]
+          properties:
+            type:
+              type: string
+              enum: [noul, choice]
+            instructions:
+              type: string
+              minLength: 1
+              maxLength: 2000
+            criteria:
+              type: object
+              minProperties: 2
+              maxProperties: 8
+              additionalProperties:
+                type: string
+                minLength: 1
+                maxLength: 300
+    DecisionResult:
+      type: object
+      required: [type, question, answer, options]
+      properties:
+        type:
+          type: string
+          enum: [noul, choice]
+        question:
+          type: string
+        answer:
+          type: string
+        probability:
+          type: number
+          minimum: 0
+          maximum: 1
+        options:
+          type: array
+          items:
+            type: object
+            required: [key, label, weight]
+            properties:
+              key:
+                type: string
+              label:
+                type: string
+              weight:
+                type: number
+                minimum: 0
+                maximum: 1
     HealthStatus:
       type: object
       properties:

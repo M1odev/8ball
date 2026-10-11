@@ -3,8 +3,8 @@ name: 8ball product direction
 description: User-stated intent for future multiple-choice responses and screen layout.
 ---
 
-The user intends to have “a bar graph at the bottom of the screen in response to multiple choice prompts.”
+The user wants multiple-choice response weights shown as bars between the eight ball and the prompt box. The MVP now includes Claude context preparation followed by Jev, supporting only multiple choice and noul, not score.
 
-**Why:** The user stated this as the reason to move the ball higher and make it smaller.
+**Why:** The user explicitly requested this placement and scope when moving beyond the static frontend.
 
-**How to apply:** Keep room below the ball and prompt for that future response area. This is product direction, not permission to implement a graph or multiple-choice logic before the user asks.
+**How to apply:** Preserve the minimalist ball-centered layout and space for result bars above the prompt. Do not add score types or accounts without a new request.

@@ -1,2 +1,3 @@
 - [Vite global shadowing](vite-global-shadowing.md) — avoid module-level variables named window in React components; Fast Refresh instrumentation relies on the browser global.
-- [8ball product direction](8ball-product-direction.md) — reserve the lower screen for future bar-graph responses to multiple-choice prompts.
+- [8ball product direction](8ball-product-direction.md) — Claude → Jev MVP supports noul and choice; weighted bars belong between the ball and prompt.
+- [Hack Club model routing](hackclub-model-routing.md) — a listed batch Claude variant failed interactive calls; use a verified non-batch model.
