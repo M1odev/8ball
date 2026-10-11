@@ -17,19 +17,14 @@ const silhouette = pixelCircle(46);
 const highlight = pixelCircle(44);
 const shadedBody = pixelCircle(43, 50, 50);
 const windowPath = pixelCircle(23);
-const bandClip = pixelCircle(42);
 
 export function EightBallArt() {
   return (
     <svg className="orb-art" viewBox="0 0 96 96" shapeRendering="crispEdges" aria-hidden="true">
-      <defs>
-        <clipPath id="eightball-band-clip"><path d={bandClip} /></clipPath>
-      </defs>
       <path d={silhouette} fill="#050505" />
       <path d={highlight} fill="#242424" />
       <path d={shadedBody} fill="#050505" />
       <path d={windowPath} fill="#fff" />
-      <rect x="0" y="41" width="96" height="14" fill="#fff" clipPath="url(#eightball-band-clip)" />
     </svg>
   );
 }

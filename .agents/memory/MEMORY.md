@@ -1,1 +1,2 @@
 - [Vite global shadowing](vite-global-shadowing.md) — avoid module-level variables named window in React components; Fast Refresh instrumentation relies on the browser global.
+- [8ball product direction](8ball-product-direction.md) — reserve the lower screen for future bar-graph responses to multiple-choice prompts.

@@ -101,16 +101,16 @@ body { min-width: 320px; min-height: 100dvh; }
   position: relative;
   z-index: 1;
   min-height: 0;
-  padding: 24px 0;
+  padding: clamp(40px, 7vh, 72px) 0 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: clamp(30px, 5vh, 48px);
 }
 .orb {
   position: relative;
-  width: min(76vw, 400px);
+  width: min(72vw, 360px);
   aspect-ratio: 1;
   display: block;
 }
@@ -204,8 +204,8 @@ body { min-width: 320px; min-height: 100dvh; }
 @media (max-width: 600px) {
   .page-shell { padding: 18px 16px; }
   .brand { font-size: 13px; }
-  .main-stage { gap: 28px; }
-  .orb { width: min(76vw, 300px); }
+  .main-stage { gap: 28px; padding-top: 44px; }
+  .orb { width: min(70vw, 270px); }
   .prompt-frame { width: 100%; }
   .prompt { min-height: 56px; font-size: 14px; }
 }
