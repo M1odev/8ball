@@ -107,6 +107,7 @@ body { min-width: 320px; min-height: 100dvh; }
   gap: clamp(24px, 4vh, 36px);
 }
 .orb {
+  container-type: inline-size;
   position: relative;
   width: min(72vw, 360px);
   aspect-ratio: 1;
@@ -117,6 +118,7 @@ body { min-width: 320px; min-height: 100dvh; }
 .orb.is-busy .orb-art { animation: orb-shake .9s steps(4) infinite; }
 @keyframes orb-shake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
 .orb-answer.is-eight { font-size: 28px; }
+.orb-answer.is-choice { width: 34%; text-wrap: balance; }
 .orb-art {
   display: block;
   width: 100%;

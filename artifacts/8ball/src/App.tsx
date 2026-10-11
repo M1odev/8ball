@@ -52,7 +52,8 @@ function EightBall() {
       e.preventDefault(); void submit();
     }
   };
-  const orbText = busy ? '...' : result ? result.type === 'choice' ? 'PICK' : result.answer : '8';
+  const orbText = busy ? '...' : result?.answer ?? '8';
+  const isChoiceAnswer = !busy && result?.type === 'choice';
   const status = stage === 'preparing' ? 'Preparing context…'
     : stage === 'asking' ? 'Asking Jev…'
     : stage === 'error' ? error
@@ -66,7 +67,11 @@ function EightBall() {
       <section className="main-stage" aria-label="Ask a question">
         <div className={`orb${busy ? ' is-busy' : ''}`} role="img" aria-label={`Eight ball: ${result?.answer ?? (busy ? 'thinking' : 'waiting for a question')}`}>
           <EightBallArt />
-          <span className={`orb-answer${orbText === '8' ? ' is-eight' : ''}`} aria-hidden="true">{orbText}</span>
+          <span
+            className={`orb-answer${!result && !busy ? ' is-eight' : ''}${isChoiceAnswer ? ' is-choice' : ''}`}
+            style={isChoiceAnswer ? { fontSize: `clamp(4px, ${Math.min(5, 28 / Math.sqrt(Math.max(1, orbText.length)))}cqw, 16px)` } : undefined}
+            aria-hidden="true"
+          >{orbText}</span>
         </div>
         <div className="readout">
           <p className={`status${stage === 'error' ? ' is-error' : ''}`} role="status" aria-live="polite">{status}</p>
