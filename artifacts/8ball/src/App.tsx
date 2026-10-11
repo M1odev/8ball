@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import { ErrorBoundary } from '@/components/error-boundary';
+import { EightBallArt } from '@/components/eight-ball-art';
 import NotFound from '@/pages/not-found';
 import { Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 
@@ -12,12 +13,7 @@ function EightBall() {
 
       <section className="main-stage" aria-label="Ask a question">
         <div className="orb" role="img" aria-label="Eight ball showing the static answer yes">
-          <svg className="orb-art" viewBox="0 0 256 256" shapeRendering="crispEdges" aria-hidden="true">
-            <circle className="orb-silhouette" cx="128" cy="128" r="126" />
-            <circle className="orb-window" cx="128" cy="128" r="59" />
-            <rect className="orb-band" x="0" y="110" width="256" height="36" />
-            <path className="orb-band-outline" d="M3 110H72 M184 110H253 M3 146H72 M184 146H253" />
-          </svg>
+          <EightBallArt />
           <span className="orb-answer" aria-hidden="true">YES</span>
         </div>
         <label className="sr-only" htmlFor="question">Your question</label>
@@ -31,8 +27,8 @@ function EightBall() {
               rows={2}
             />
             <button className="prompt-send" type="button" aria-label="Send question">
-              <svg viewBox="0 0 16 16" shapeRendering="crispEdges" aria-hidden="true">
-                <path d="M6 15V8H3V6H5V4H7V2H9V4H11V6H13V8H10V15Z" />
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M8 13V3M3 8l5-5 5 5" />
               </svg>
             </button>
           </div>

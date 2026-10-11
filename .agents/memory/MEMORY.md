@@ -1,0 +1,1 @@
+- [Vite global shadowing](vite-global-shadowing.md) — avoid module-level variables named window in React components; Fast Refresh instrumentation relies on the browser global.
