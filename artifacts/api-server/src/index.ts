@@ -1,6 +1,10 @@
 import app from "./app";
 import { logger } from "./lib/logger";
 
+if (!process.env.SESSION_SECRET?.trim()) {
+  throw new Error("SESSION_SECRET is required to identify visitors and enforce free-question limits.");
+}
+
 const rawPort = process.env["PORT"];
 
 if (!rawPort) {

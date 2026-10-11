@@ -1,7 +1,7 @@
 kind = "web"
 previewPath = "/"
 title = "8ball"
-description = "A monochrome, 8-bit-inspired chat shell for asking Jev questions, centered on a striking eight ball. Frontend only: a text prompt with no AI, web search, accounts, or backend connections."
+description = "A monochrome, pixel-inspired decision app. Claude prepares context with optional web research, and Jev answers with yes/no probabilities or weighted multiple-choice options. Includes a limited free trial and support for personal Hack Club AI keys."
 version = "1.0.0"
 id = "artifacts/8ball"
 router = "path"

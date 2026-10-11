@@ -2,3 +2,4 @@
 - [8ball product direction](8ball-product-direction.md) — Claude → Jev MVP supports noul and choice; weighted bars belong between the ball and prompt.
 - [Hack Club model routing](hackclub-model-routing.md) — a listed batch Claude variant failed interactive calls; use a verified non-batch model.
 - [Concurrent editor saves](concurrent-editor-saves.md) — if successful patches repeatedly disappear alongside user edits, pause and coordinate rather than overwriting again.
+- [Configuration validation](configuration-validation.md) — .replit edits require a workspace temp file and verifyAndReplaceDotReplit, not a direct patch.

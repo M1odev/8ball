@@ -3,3 +3,8 @@
 
 # No need to store the pnpm store twice.
 .local
+
+# Local context and reference sketches are not needed by the published app.
+/.agents
+/attached_assets
+/.cache
