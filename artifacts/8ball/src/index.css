@@ -80,7 +80,7 @@ body { min-width: 320px; min-height: 100dvh; }
   min-height: 100vh;
   min-height: 100dvh;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   padding: clamp(18px, 3vw, 34px);
   overflow: visible;
   position: relative;
@@ -91,9 +91,21 @@ body { min-width: 320px; min-height: 100dvh; }
 .brand {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
   color: #050505;
-  font: 16px/1.5 'Press Start 2P', monospace;
+}
+.brand-name {
+  font: 22px/1.35 'Press Start 2P', monospace;
   letter-spacing: .02em;
+}
+.brand-byline {
+  font: 600 12px/1.4 'Space Grotesk', Arial, sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #666;
 }
 .main-stage {
   position: relative;
@@ -242,15 +254,49 @@ body { min-width: 320px; min-height: 100dvh; }
 .char-count { min-height: 0; padding: 0 12px; text-align: right; font: 11px/1.6 'Space Grotesk', sans-serif; color: #666; }
 .char-count:empty { display: none; }
 .char-count.is-over { color: #050505; font-weight: 700; }
+.desktop-faq { display: none; }
 @media (max-height: 720px) { .orb { width: min(60vw, 38vh, 300px); } .main-stage { gap: 18px; padding-top: 10px; } }
 @media (max-width: 600px) {
   .page-shell { padding: 18px 16px; }
-  .brand { font-size: 13px; }
+  .brand-name { font-size: 16px; }
+  .brand-byline { font-size: 10px; }
   .main-stage { gap: 24px; padding-top: 24px; }
   .orb { width: min(70vw, 270px, 40vh); }
   .page-shell { overflow: visible; }
   .prompt-frame { width: 100%; }
   .prompt { min-height: 56px; font-size: 14px; }
+}
+@media (min-width: 900px) and (min-height: 720px) {
+  .page-shell { padding-bottom: 22px; }
+  .main-stage { gap: 20px; padding-top: 12px; padding-bottom: 12px; }
+  .orb { width: min(56vw, 290px, 34vh); }
+  .desktop-faq {
+    display: block;
+    width: min(100%, 920px);
+    justify-self: center;
+    padding-top: 14px;
+    border-top: 1px solid #e5e5e5;
+  }
+  .desktop-faq h2 {
+    margin: 0 0 12px;
+    font: 9px/1.5 'Press Start 2P', monospace;
+    letter-spacing: .08em;
+  }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(18px, 3vw, 42px);
+  }
+  .faq-item h3 {
+    margin: 0 0 5px;
+    font: 600 13px/1.4 'Space Grotesk', Arial, sans-serif;
+  }
+  .faq-item p {
+    margin: 0;
+    max-width: 34ch;
+    color: #666;
+    font: 12px/1.5 'Space Grotesk', Arial, sans-serif;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }

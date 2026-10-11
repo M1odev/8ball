@@ -65,7 +65,10 @@ function EightBall() {
 
   return (
     <main className="page-shell">
-      <header className="brand" aria-label="8ball">8Ball</header>
+      <header className="brand" aria-label="8Ball">
+        <span className="brand-name">8Ball</span>
+        <span className="brand-byline">Powered by Jev</span>
+      </header>
       <section className={`main-stage${result ? ' has-result' : ''}`} aria-label="Ask a question">
         <div className={`orb${busy ? ' is-busy' : ''}`} role="img" aria-label={`Eight ball: ${result?.answer ?? (busy ? 'thinking' : 'waiting for a question')}`}>
           <EightBallArt />
@@ -119,6 +122,23 @@ function EightBall() {
             {input.length > MAX_CHARS * .8 ? `${input.length} / ${MAX_CHARS}` : ''}
           </div>
         </form>
+      </section>
+      <section className="desktop-faq" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQ</h2>
+        <div className="faq-grid">
+          <article className="faq-item" data-testid="faq-jev">
+            <h3>What is Jev?</h3>
+            <p>Jev is the decision engine behind 8Ball. It weighs choices or estimates the likelihood of a yes-or-no outcome.</p>
+          </article>
+          <article className="faq-item" data-testid="faq-process">
+            <h3>How does it work?</h3>
+            <p>Claude turns your question into a clear prompt for Jev. When useful, it can add context with a round of web research.</p>
+          </article>
+          <article className="faq-item" data-testid="faq-results">
+            <h3>How should I read the result?</h3>
+            <p>For choices, the bars show Jev’s relative weighting for each option. Yes-or-no answers include an estimated probability of yes.</p>
+          </article>
+        </div>
       </section>
     </main>
   );
