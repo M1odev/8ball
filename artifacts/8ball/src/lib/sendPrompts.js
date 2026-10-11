@@ -1,22 +1,20 @@
 // Credentials and provider calls live on the API server, never in this bundle.
 const apiBase = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/api/decision`;
 
-async function post(path, body, signal, apiKey) {
-  const safe = text => apiKey ? text.split(apiKey).join('[REDACTED]') : text;
-  console.info(safe(`[8ball] ${path} submitted\n${JSON.stringify(body, null, 2)}`));
+async function post(path, body, signal) {
+  console.info(`[8ball] ${path} submitted\n${JSON.stringify(body, null, 2)}`);
   const response = await fetch(`${apiBase}/${path}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', ...(apiKey ? { 'X-8ball-key': apiKey } : {}) },
-    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
     signal,
   });
   const data = await response.json().catch(() => null);
   console.groupCollapsed(`[8ball] ${path} exchange · HTTP ${response.status}`);
   try {
-    for (const entry of data?.debugLog ?? []) console.info(safe(entry));
+    for (const entry of data?.debugLog ?? []) console.info(entry);
     const { debugLog, ...result } = data ?? {};
-    console.info(safe(`[8ball] ${path} result\n${JSON.stringify(result, null, 2)}`));
+    console.info(`[8ball] ${path} result\n${JSON.stringify(result, null, 2)}`);
   } finally {
     console.groupEnd();
   }
@@ -29,20 +27,25 @@ async function post(path, body, signal, apiKey) {
   return result;
 }
 
-export function toJevPrompt(userInput, signal, apiKey) {
-  return post('prepare', { input: userInput }, signal, apiKey);
+export function toJevPrompt(userInput, signal) {
+  return post('prepare', { input: userInput }, signal);
 }
 
-export function getJevResponse(prompt, signal, apiKey) {
-  return post('answer', prompt, signal, apiKey);
+export function getJevResponse(prompt, signal) {
+  return post('answer', prompt, signal);
 }
 
-export async function getDecisionAccess(signal) {
-  const response = await fetch(`${apiBase}/access`, { signal, credentials: 'same-origin', cache: 'no-store' });
-  const data = await response.json();
-  if (!response.ok) throw new Error(data?.error || 'Could not load your free allowance.');
-  return data;
-}
 
-// Exa research is performed on demand by Claude through the prepare endpoint.
-// Nothing calls an external provider on page load; credentials stay server-side.
+//this is an example of how you could call EXA
+const response = await fetch('https://ai.hackclub.com/proxy/v1/exa/search', {
+  method: 'POST',
+  headers: {
+    'Authorization': '',// fill in the same API key here when you implement it in the api-server
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    query: 'open source alternatives to Notion',
+    numResults: 3,
+    contents: { text: { maxCharacters: 500 } },
+  }),
+});
