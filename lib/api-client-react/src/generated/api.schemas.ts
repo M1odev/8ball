@@ -34,6 +34,7 @@ export type PreparedPromptQuestion = {
 };
 
 export interface PreparedPrompt {
+  readonly debugLog?: readonly string[];
   /**
      * @minLength 1
      * @maxLength 20000
@@ -61,6 +62,7 @@ export type DecisionResultOptionsItem = {
 };
 
 export interface DecisionResult {
+  readonly debugLog?: readonly string[];
   type: DecisionResultType;
   question: string;
   answer: string;
@@ -78,5 +80,6 @@ export interface HealthStatus {
 
 export type DecisionErrorResponse = {
   error: string;
+  readonly debugLog?: readonly string[];
 };
 

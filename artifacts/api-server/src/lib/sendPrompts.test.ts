@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { validatePrompt, normalizeAnswer } from "./sendPrompts";
+import { validatePrompt, normalizeAnswer, toJevPrompt, getJevResponse } from "./sendPrompts";
+import { formatTrace } from "./decisionTrace";
 
 const noul = { state: "Some context", question: { type: "noul" as const, instructions: "Is it appropriate?" } };
 const choice = { state: "Some context", question: { type: "choice" as const, instructions: "Which option?", criteria: { a: "Option A", b: "Option B" } } };
@@ -27,4 +28,29 @@ test("rejects absent, out-of-range and incomplete upstream results", () => {
   assert.throws(() => normalizeAnswer(noul, { answers: { decision: { noul: 98 } } }));
   assert.throws(() => normalizeAnswer(choice, { answers: { decision: { choice: "a", probabilities: { a: 1 } } } }));
   assert.throws(() => normalizeAnswer(choice, { answers: { decision: { choice: "c", probabilities: { a: 0.5, b: 0.5 } } } }));
+});
+
+test("traces preserve long content while redacting credential fields", () => {
+  const content = "Full context.\n".repeat(2000);
+  const entry = formatTrace("response", { content, nested: { api_key: "test-only-credential" } });
+  assert.equal(JSON.parse(entry.slice(entry.indexOf("\n") + 1)).content, content);
+  assert.ok(!entry.includes("test-only-credential"));
+  assert.ok(entry.includes("[REDACTED]"));
+});
+
+test("both provider stages emit full request and raw response traces", async t => {
+  const claude = { choices: [{ message: { content: JSON.stringify(noul) } }], usage: { total_tokens: 123 } };
+  const jev = { answers: { decision: { noul: 0.7 } }, metadata: { fixture: true } };
+  t.mock.method(globalThis, "fetch", async (url: string) =>
+    new Response(JSON.stringify(url.endsWith("chat/completions") ? claude : jev), { status: 200 }));
+  const entries: Array<{ label: string; value: any }> = [];
+  const trace = (label: string, value: unknown) => { entries.push({ label, value }); };
+  const prepared = await toJevPrompt("Fixture question", trace);
+  await getJevResponse(prepared, trace);
+  assert.equal(entries.length, 4);
+  assert.equal(entries[0].value.messages[1].content, "Fixture question");
+  assert.ok(entries[0].value.messages[0].content.includes("You prepare one decision"));
+  assert.deepEqual(entries[1].value, claude);
+  assert.equal(entries[2].value.state, prepared.state);
+  assert.deepEqual(entries[3].value, jev);
 });

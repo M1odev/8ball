@@ -86,6 +86,11 @@ components:
             properties:
               error:
                 type: string
+              debugLog:
+                type: array
+                readOnly: true
+                items:
+                  type: string
   schemas:
     DecisionInput:
       type: object
@@ -99,6 +104,11 @@ components:
       type: object
       required: [state, question]
       properties:
+        debugLog:
+          type: array
+          readOnly: true
+          items:
+            type: string
         state:
           type: string
           minLength: 1
@@ -126,6 +136,11 @@ components:
       type: object
       required: [type, question, answer, options]
       properties:
+        debugLog:
+          type: array
+          readOnly: true
+          items:
+            type: string
         type:
           type: string
           enum: [noul, choice]

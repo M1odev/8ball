@@ -8,4 +8,5 @@
 
 export type DecisionErrorResponse = {
   error: string;
+  readonly debugLog?: readonly string[];
 };

@@ -8,3 +8,9 @@ The user wants multiple-choice response weights shown as bars between the eight 
 **Why:** The user explicitly requested this placement and scope when moving beyond the static frontend.
 
 **How to apply:** Preserve the minimalist ball-centered layout and space for result bars above the prompt. Do not add score types or accounts without a new request.
+
+Full prompts and responses should be inspectable in the console by users and curious developers.
+
+**Why:** The user explicitly requested transparent, full exchanges rather than truncated summaries.
+
+**How to apply:** Keep browser traces limited to that user's request and keep credentials out of logs. Full prompt text is intentionally visible; do not silently remove this transparency when changing the AI pipeline.

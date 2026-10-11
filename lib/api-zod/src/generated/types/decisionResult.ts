@@ -9,6 +9,7 @@ import type { DecisionResultOptionsItem } from './decisionResultOptionsItem';
 import type { DecisionResultType } from './decisionResultType';
 
 export interface DecisionResult {
+  readonly debugLog?: readonly string[];
   type: DecisionResultType;
   question: string;
   answer: string;

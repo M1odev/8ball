@@ -8,6 +8,7 @@
 import type { PreparedPromptQuestion } from './preparedPromptQuestion';
 
 export interface PreparedPrompt {
+  readonly debugLog?: readonly string[];
   /**
      * @minLength 1
      * @maxLength 20000

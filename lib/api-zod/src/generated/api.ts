@@ -25,6 +25,7 @@ export const prepareDecisionResponseQuestionCriteriaMaxOne = 300;
 
 
 export const PrepareDecisionResponse = zod.object({
+  "debugLog": zod.array(zod.string()).optional(),
   "state": zod.string().min(1).max(prepareDecisionResponseStateMax),
   "question": zod.object({
   "type": zod.enum(['noul', 'choice']),
@@ -60,6 +61,7 @@ export const answerDecisionResponseOptionsItemWeightMax = 1;
 
 
 export const AnswerDecisionResponse = zod.object({
+  "debugLog": zod.array(zod.string()).optional(),
   "type": zod.enum(['noul', 'choice']),
   "question": zod.string(),
   "answer": zod.string(),
