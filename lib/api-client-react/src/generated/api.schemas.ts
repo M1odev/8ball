@@ -5,6 +5,12 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+export interface DecisionAccess {
+  limit: number;
+  remaining: number;
+  networkLimited: boolean;
+}
+
 export interface DecisionInput {
   /**
      * @minLength 1
@@ -34,6 +40,8 @@ export type PreparedPromptQuestion = {
 };
 
 export interface PreparedPrompt {
+  /** Single-use, visitor-bound authorization for this exact prepared question. */
+  ticket: string;
   /**
      * Completed research rounds, not the number of search queries.
      * @minimum 0
@@ -94,4 +102,9 @@ export type DecisionErrorResponse = {
   error: string;
   readonly debugLog?: readonly string[];
 };
+
+/**
+ * Optional visitor-owned Hack Club AI key; never persisted or logged.
+ */
+export type VisitorKeyParameter = string;
 

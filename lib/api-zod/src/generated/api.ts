@@ -8,6 +8,22 @@
 import * as zod from 'zod';
 
 
+export const GetDecisionAccessResponse = zod.object({
+  "limit": zod.number().int(),
+  "remaining": zod.number().int(),
+  "networkLimited": zod.boolean()
+})
+
+
+export const prepareDecisionHeaderX8ballKeyMin = 8;
+export const prepareDecisionHeaderX8ballKeyMax = 512;
+
+
+
+export const PrepareDecisionHeader = zod.object({
+  "X-8ball-key": zod.string().min(prepareDecisionHeaderX8ballKeyMin).max(prepareDecisionHeaderX8ballKeyMax).optional().describe('Optional visitor-owned Hack Club AI key; never persisted or logged.')
+})
+
 export const prepareDecisionBodyInputMax = 4000;
 
 
@@ -28,6 +44,7 @@ export const prepareDecisionResponseQuestionCriteriaMaxOne = 300;
 
 
 export const PrepareDecisionResponse = zod.object({
+  "ticket": zod.string().uuid().describe('Single-use, visitor-bound authorization for this exact prepared question.'),
   "researchRounds": zod.number().int().min(prepareDecisionResponseResearchRoundsMin).max(prepareDecisionResponseResearchRoundsMax).optional().describe('Completed research rounds, not the number of search queries.'),
   "debugLog": zod.array(zod.string()).optional(),
   "state": zod.string().min(1).max(prepareDecisionResponseStateMax),
@@ -38,6 +55,15 @@ export const PrepareDecisionResponse = zod.object({
 })
 })
 
+
+export const answerDecisionHeaderX8ballKeyMin = 8;
+export const answerDecisionHeaderX8ballKeyMax = 512;
+
+
+
+export const AnswerDecisionHeader = zod.object({
+  "X-8ball-key": zod.string().min(answerDecisionHeaderX8ballKeyMin).max(answerDecisionHeaderX8ballKeyMax).optional().describe('Optional visitor-owned Hack Club AI key; never persisted or logged.')
+})
 
 export const answerDecisionBodyResearchRoundsMin = 0;
 export const answerDecisionBodyResearchRoundsMax = 1;
@@ -51,6 +77,7 @@ export const answerDecisionBodyQuestionCriteriaMaxOne = 300;
 
 
 export const AnswerDecisionBody = zod.object({
+  "ticket": zod.string().uuid().describe('Single-use, visitor-bound authorization for this exact prepared question.'),
   "researchRounds": zod.number().int().min(answerDecisionBodyResearchRoundsMin).max(answerDecisionBodyResearchRoundsMax).optional().describe('Completed research rounds, not the number of search queries.'),
   "state": zod.string().min(1).max(answerDecisionBodyStateMax),
   "question": zod.object({

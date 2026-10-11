@@ -6,6 +6,7 @@ export const logger = pino({
   level: process.env.LOG_LEVEL ?? "info",
   redact: [
     "req.headers.authorization",
+    "req.headers['x-8ball-key']",
     "req.headers.cookie",
     "res.headers['set-cookie']",
   ],

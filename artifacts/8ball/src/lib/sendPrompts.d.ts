@@ -1,4 +1,5 @@
 export interface PreparedPrompt {
+  ticket: string;
   researchRounds?: number;
   state: string;
   question: {
@@ -15,5 +16,7 @@ export interface DecisionResult {
   probability?: number;
   options: Array<{ key: string; label: string; weight: number }>;
 }
-export function toJevPrompt(userInput: string, signal?: AbortSignal): Promise<PreparedPrompt>;
-export function getJevResponse(prompt: PreparedPrompt, signal?: AbortSignal): Promise<DecisionResult>;
+export interface DecisionAccess { limit: number; remaining: number; networkLimited: boolean }
+export function getDecisionAccess(signal?: AbortSignal): Promise<DecisionAccess>;
+export function toJevPrompt(userInput: string, signal?: AbortSignal, apiKey?: string): Promise<PreparedPrompt>;
+export function getJevResponse(prompt: PreparedPrompt, signal?: AbortSignal, apiKey?: string): Promise<DecisionResult>;

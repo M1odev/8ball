@@ -38,3 +38,9 @@ Named-applicant admissions predictions are an intended demo: research the applic
 **Why:** The user explicitly requested person-first admissions research for this demo.
 
 **How to apply:** Prioritize public relevant applicant evidence and identity disambiguation within the search budget. Do not substitute generic university statistics for a profile or fabricate personal details when a name cannot be matched.
+
+Public visitors get three total free questions, with no periodic reset, then can bring their own Hack Club AI key.
+
+**Why:** The user explicitly chose a never-resetting trial when requesting public-launch rate limits.
+
+**How to apply:** Treat a full Claude/research/Jev exchange as one attempt, not separate free requests per stage. Keep visitor keys out of logs and persistent browser storage.

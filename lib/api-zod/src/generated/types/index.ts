@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './decisionAccess';
 export * from './decisionErrorResponse';
 export * from './decisionInput';
 export * from './decisionResult';
@@ -16,3 +17,4 @@ export * from './preparedPrompt';
 export * from './preparedPromptQuestion';
 export * from './preparedPromptQuestionCriteria';
 export * from './preparedPromptQuestionType';
+export * from './visitorKeyParameter';

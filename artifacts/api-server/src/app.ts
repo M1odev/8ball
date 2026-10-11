@@ -3,8 +3,11 @@ import cors from "cors";
 import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
+import cookieParser from "cookie-parser";
 
 const app: Express = express();
+// Only trust the immediate hosting proxy, never arbitrary leftmost X-Forwarded-For values.
+app.set("trust proxy", 1);
 
 app.use(
   pinoHttp({
@@ -26,6 +29,7 @@ app.use(
   }),
 );
 app.use(cors());
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

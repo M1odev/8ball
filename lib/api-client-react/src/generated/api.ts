@@ -20,6 +20,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  DecisionAccess,
   DecisionErrorResponse,
   DecisionInput,
   DecisionResult,
@@ -80,6 +81,77 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
   }
   return result;
 };
+
+export const getGetDecisionAccessUrl = () => {
+
+
+
+
+  return `/api/decision/access`
+}
+
+export const getDecisionAccess = async ( options?: Parameters<typeof customFetch>[1]): Promise<DecisionAccess> => {
+
+  return customFetch<DecisionAccess>(getGetDecisionAccessUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetDecisionAccessQueryKey = () => {
+    return [
+    `/api/decision/access`
+    ] as const;
+    }
+
+
+export const getGetDecisionAccessQueryOptions = <TData = Awaited<ReturnType<typeof getDecisionAccess>>, TError = ErrorType<DecisionErrorResponse>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getDecisionAccess>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetDecisionAccessQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getDecisionAccess>>> = ({ signal }) => getDecisionAccess({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getDecisionAccess>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetDecisionAccessQueryResult = NonNullable<Awaited<ReturnType<typeof getDecisionAccess>>>
+export type GetDecisionAccessQueryError = ErrorType<DecisionErrorResponse>
+
+
+
+export function useGetDecisionAccess<TData = Awaited<ReturnType<typeof getDecisionAccess>>, TError = ErrorType<DecisionErrorResponse>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getDecisionAccess>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetDecisionAccessQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
 
 export const getPrepareDecisionUrl = () => {
 

@@ -11,10 +11,25 @@ tags:
   - name: health
     description: Health operations
 paths:
+  /decision/access:
+    get:
+      operationId: getDecisionAccess
+      tags: [decision]
+      responses:
+        "200":
+          description: Anonymous lifetime allowance and network guard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DecisionAccess"
+        "503":
+          $ref: "#/components/responses/DecisionError"
   /decision/prepare:
     post:
       operationId: prepareDecision
       tags: [decision]
+      parameters:
+        - $ref: "#/components/parameters/VisitorKey"
       requestBody:
         required: true
         content:
@@ -40,6 +55,8 @@ paths:
     post:
       operationId: answerDecision
       tags: [decision]
+      parameters:
+        - $ref: "#/components/parameters/VisitorKey"
       requestBody:
         required: true
         content:
@@ -75,6 +92,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
 components:
+  parameters:
+    VisitorKey:
+      name: X-8ball-key
+      in: header
+      required: false
+      description: Optional visitor-owned Hack Club AI key; never persisted or logged.
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 512
   responses:
     DecisionError:
       description: Validation, rate limit, configuration, or upstream failure
@@ -92,6 +119,16 @@ components:
                 items:
                   type: string
   schemas:
+    DecisionAccess:
+      type: object
+      required: [limit, remaining, networkLimited]
+      properties:
+        limit:
+          type: integer
+        remaining:
+          type: integer
+        networkLimited:
+          type: boolean
     DecisionInput:
       type: object
       required: [input]
@@ -102,8 +139,12 @@ components:
           maxLength: 4000
     PreparedPrompt:
       type: object
-      required: [state, question]
+      required: [state, question, ticket]
       properties:
+        ticket:
+          type: string
+          format: uuid
+          description: Single-use, visitor-bound authorization for this exact prepared question.
         researchRounds:
           type: integer
           minimum: 0

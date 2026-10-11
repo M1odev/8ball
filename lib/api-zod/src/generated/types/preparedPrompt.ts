@@ -8,6 +8,8 @@
 import type { PreparedPromptQuestion } from './preparedPromptQuestion';
 
 export interface PreparedPrompt {
+  /** Single-use, visitor-bound authorization for this exact prepared question. */
+  ticket: string;
   /**
      * Completed research rounds, not the number of search queries.
      * @minimum 0

@@ -212,6 +212,21 @@ body { min-width: 320px; min-height: 100dvh; }
   background: #fff;
   transition: border-color .18s ease, box-shadow .18s ease;
 }
+.prompt-area { width: min(100%, 430px); }
+.prompt-area .prompt-frame { width: 100%; }
+.access-panel { padding: 12px 4px 0; font: 12px/1.5 'Space Grotesk', sans-serif; color: #555; }
+.access-summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 12px; }
+.access-link { border: 0; padding: 3px 0; background: none; color: #111; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font: inherit; }
+.access-link:disabled { opacity: .45; cursor: not-allowed; }
+.access-note { margin: 7px 0 0; font-size: 11px; line-height: 1.5; text-align: center; color: #666; }
+.key-settings { margin-top: 10px; padding: 14px; border: 1px solid #ddd; border-radius: 12px; background: #fafafa; }
+.key-settings label { color: #111; font-weight: 600; }
+.key-settings .access-note { text-align: left; }
+.key-entry { display: flex; gap: 8px; margin: 12px 0 4px; }
+.key-entry input { width: 100%; min-width: 0; padding: 9px; border: 1px solid #bbb; border-radius: 7px; background: #fff; font: inherit; color: #111; }
+.key-entry button { flex: 0 0 auto; border: 1px solid #111; border-radius: 7px; padding: 8px 12px; font: inherit; color: #fff; background: #111; cursor: pointer; }
+.key-entry button:disabled { opacity: .45; cursor: not-allowed; }
+.access-panel :focus-visible { outline: 2px solid #111; outline-offset: 3px; }
 .prompt-frame:focus-within { border-color: #686868; box-shadow: 0 0 0 3px #00000006; }
 .prompt-content {
   min-height: 78px;

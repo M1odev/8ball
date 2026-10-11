@@ -1,4 +1,4 @@
-import { type KeyboardEvent, type ReactNode, useEffect, useRef, useState } from 'react';
+Wimport { type KeyboardEvent, type ReactNode, useEffect, useRef, useState } from 'react';
 import { toJevPrompt, getJevResponse, type DecisionResult } from '@/lib/sendPrompts';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { EightBallArt } from '@/components/eight-ball-art';
@@ -129,11 +129,11 @@ function EightBall() {
         <div className="faq-grid">
           <article className="faq-item" data-testid="faq-jev">
             <h3>What is Jev?</h3>
-            <p>Jev is the decision engine behind 8Ball. It weighs choices or estimates the likelihood of a yes-or-no outcome.</p>
+            <p>Jev is a <b>system one</b> AI model. It responds to questions with one word answers -- yes, no, or an option for MCQs.</p>
           </article>
           <article className="faq-item" data-testid="faq-process">
             <h3>How does it work?</h3>
-            <p>Claude turns your question into a clear prompt for Jev. When useful, it can add context with a round of web research.</p>
+            <p>Claude turns your question into a clear prompt for Jev because Jev cannot reason deeply. When useful, it can add context with a round of web research.</p>
           </article>
           <article className="faq-item" data-testid="faq-results">
             <h3>How should I read the result?</h3>
