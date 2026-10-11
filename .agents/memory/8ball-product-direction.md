@@ -20,3 +20,9 @@ Claude should preserve explicitly named alternatives with short, unembellished l
 **Why:** The user objected to added "No meaningful difference" choices and parenthetical descriptions appended to brand names.
 
 **How to apply:** Put context, qualifications, and uncertainty in the state; leave Jev to weigh the actual options. Do not confuse a subjective question with a request to evaluate whether objective certainty is possible.
+
+Research should be on demand: Claude decides whether evidence is needed, Hack Club Exa supplies it, and Claude then rebuilds the prompt for Jev.
+
+**Why:** The user requested this sequence, not mandatory search on every question or an Exa-generated answer replacing Jev.
+
+**How to apply:** Preserve Jev as the final decision maker and keep retrieved evidence distinct from assumptions. Limit research rounds to keep response time and shared API usage bounded.

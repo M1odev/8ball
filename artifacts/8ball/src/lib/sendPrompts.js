@@ -34,3 +34,7 @@ export function toJevPrompt(userInput, signal) {
 export function getJevResponse(prompt, signal) {
   return post('answer', prompt, signal);
 }
+
+
+// Exa research is performed on demand by Claude through the prepare endpoint.
+// Nothing calls an external provider on page load; credentials stay server-side.
