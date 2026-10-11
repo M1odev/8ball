@@ -14,3 +14,9 @@ Full prompts and responses should be inspectable in the console by users and cur
 **Why:** The user explicitly requested transparent, full exchanges rather than truncated summaries.
 
 **How to apply:** Keep browser traces limited to that user's request and keep credentials out of logs. Full prompt text is intentionally visible; do not silently remove this transparency when changing the AI pipeline.
+
+Claude should preserve explicitly named alternatives with short, unembellished labels and should not invent evasive alternatives for subjective comparisons.
+
+**Why:** The user objected to added "No meaningful difference" choices and parenthetical descriptions appended to brand names.
+
+**How to apply:** Put context, qualifications, and uncertainty in the state; leave Jev to weigh the actual options. Do not confuse a subjective question with a request to evaluate whether objective certainty is possible.
